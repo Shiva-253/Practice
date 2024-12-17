@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUI Pie Chart Example</title>
+
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+        #pie-chart-container {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body class="yui3-skin-sam">  <!-- Apply YUI skin -->
+
+    <h1>YUI Pie Chart Example</h1>
+
+    <!-- Container for the Pie Chart -->
+    <div id="pie-chart-container"></div>
+
+    <script>
+        YUI().use('charts-legend', function (Y) {
+            var pieChart = new Y.Chart({
+                dataProvider: [
+                    {category: "Category A", value: 50},
+                    {category: "Category B", value: 30},
+                    {category: "Category C", value: 20},
+                    {category: "Category D", value: 60},
+                    {category: "Category E", value: 50},
+                    {category: "Category F", value: 90}
+                ],
+                type: "pie",
+                render: "#pie-chart-container",
+                width: 400,
+                height: 400,
+                legend: {
+                    position: "right"
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

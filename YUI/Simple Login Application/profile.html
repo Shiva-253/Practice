@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <h1>This is a profile page</h1>
+
+    <div>
+        <h2 id="display-username"></h2>
+        <h2 id="display-email"></h2>
+        <h2 id="display-password"></h2>
+    </div>
+    
+    <a href="login.html">Logout</a>
+
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <script>
+        YUI().use('node', 'event', 'datatype', function (Y) {
+            
+            var retrievedUser = localStorage.getItem("formData");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const index = urlParams.get('index');
+
+            if (retrievedUser) {
+    
+                var formDataArray = JSON.parse(retrievedUser);
+
+                if (formDataArray.length > 0) {
+      
+                    var formData = formDataArray[index];
+
+                    document.getElementById('display-username').innerHTML = "Username: " + formData.username;
+                    document.getElementById('display-email').innerHTML = "Email: " + formData.email;
+                    document.getElementById('display-password').innerHTML = "Password: " + "**********";
+                } 
+                else {
+                alert('No user data found!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

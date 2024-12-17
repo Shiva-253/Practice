@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUI Button Color Change</title>
+    <style>
+        .myButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: lightblue;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .myButton:hover {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <button class="myButton">We will also change color</button> <!-- Button 1 -->
+        <button class="myButton">Click me to change color</button>  <!-- Button 2 -->
+        <button class="myButton">We will also change color</button>  <!-- Button 3 -->
+        <button class="myButton">We will also change color</button>  <!-- Button 4 -->
+        <button class="myButton">We will also change color</button>  <!-- Button 5 -->
+
+        <div class="child">I will be changed</div>
+   
+    </div>
+
+    <!-- Include YUI Seed -->
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+
+    <script>
+
+    //1) Y.one is method provided by the node class to select a particular element have certain id, class, or it can also be any tag. But it will find the first occurence of element 
+    //   matching the given class.
+
+    //2) Y.all is method provided by the node class to select all element element have certain id, class, or it can also be any tag. But to find even specific among them it provides
+    //   item method inside which we have to specify the index to sepcify the occurence of the element (starting from 0).
+
+    //   YUI().use('node', 'event', function(Y) {
+    //   var node = Y.one('#myButton');
+    
+    //   // Attaching a click event listener
+    //   node.on('click', function(e) {
+    //     alert('Button clicked!');
+    //   });
+    // });
+
+    //3) node.on(event, callback, context, args); --> on event listener is used to fire the callback function if particular event is executed. 
+    //   node.detach(event, callback, context); -->  detach() method is used to remove a previously attached event listener from a node. 
+
+    //     YUI().use('node', 'event', function(Y) {
+    //   var node = Y.one('#myButton');
+    
+    //   // Define the click event handler
+    //   var clickHandler = function(e) {
+    //     alert('Button clicked!');
+    //   };
+
+    //   // Attach the event listener
+    //   node.on('click', clickHandler);
+
+    //   Detach the event listener after 5 seconds
+    //   setTimeout(function() {
+    //     node.detach('click', clickHandler);
+    //     console.log('Click event listener detached');
+    //   }, 5000);
+    // });
+
+    //4) setHTML property is used to add the specified html element in the place of class or id
+
+    //5) append property is used to append the element or text in the place of class or id
+
+    //6) setStyle propery is used to set a single style to a element with given class or id.  setStyles propery is used to set a multiple style to a element with given class or id.
+
+    //7) insert method is used to add the content with respect to element position.
+
+
+        YUI().use('node', 'event', function(Y) {
+            var button2 = Y.all('.myButton').item(1); 
+            var button3 = Y.all('.myButton').item(2); 
+
+          
+
+            var changeText = Y.one('.child');
+            
+            // Select all buttons to change their color later
+            var allButtons = Y.all('.myButton');
+    
+            // Attach click event to Button 1
+            
+            button2.on('click', function() {
+        
+                changeText.setHTML('<h1>Hare Krishna!</h1>');
+
+                changeText.append('<p>This is a sample text</p>')
+
+                changeText.insert('<p>New paragraph</p>', 'before');  
+
+                changeText.addClass('highlight');   // added a class named highlight inside child class.
+
+            });
+
+            setTimeout(function() {
+                button3.detach('click', changeColor); // Detach the click event handler from button2
+                console.log('Click event listener detached');
+                
+                // Disable the button after 10 seconds
+                button2.set('disabled', true);
+                console.log('Button 2 is now disabled.');
+            }, 10000);
+    
+            var changeColor = button3.on('click', function() {
+                // Define the color array
+                var colors = ['#FF6347', '#3CB371', '#FFD700', '#8A2BE2', '#FF1493'];
+                var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                // Change the background color of all buttons
+                allButtons.setStyle('background-color', randomColor);
+
+                var addtext = Y.one('.highlight');
+
+                addtext.setHTML('Practice makes man perfect.');
+
+                
+            });
+        });
+    </script>
+
+</body>
+</html>

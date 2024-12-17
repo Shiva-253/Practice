@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+
+    <form id="signup-form" action="/profile.html">
+        <label for="name">User Name: </label><br>
+        <input type="text" id="uname" name="uname"><br>
+        <label for="email">Email: </label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="lname">Password: </label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <span>Register another user</span>
+    <a href="from.html">Go to register page</a>
+
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <script>
+        YUI().use('node', 'event', 'datatype', function (Y) {
+            const form = Y.one('#signup-form');
+            const usernameInput = Y.one('#uname');
+            const emailInput = Y.one('#email');
+            const passwordInput = Y.one('#password');
+
+            form.on('submit', function (e) {
+                e.preventDefault(); 
+
+                const username = usernameInput.get('value');
+                const email = emailInput.get('value');
+                const password = passwordInput.get('value');
+
+                if (!username || !email || !password) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                var retrievedUser = localStorage.getItem("formData");
+                var userFound = false;
+                var index;
+                if (retrievedUser) {
+    
+                    var formDataArray = JSON.parse(retrievedUser);
+
+                    if (formDataArray.length > 0) {
+
+                        for(let i=0; i<formDataArray.length; i++){
+                            var formData = formDataArray[i];
+
+                            if(username == formData.username && email == formData.email && password == formData.password){
+                                userFound = true;
+                                index = i;
+                                break;
+                            }
+                        }
+
+                        if(userFound == true){
+                            window.location.href = "/profile.html?index="+index; 
+                        }
+                        else{
+                            alert("Invalid username, email, password");
+                        }
+                    } 
+                }   
+            });
+        });
+    </script>
+</body>
+</html>

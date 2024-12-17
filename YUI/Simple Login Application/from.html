@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+
+    <h1> Register Here</h1>
+
+    <form id="signup-form" action="/login.html">
+        <label for="name">User Name: </label><br>
+        <input type="text" id="uname" name="uname"><br>
+        <label for="email">Email: </label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="lname">Password: </label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Register">
+    </form> 
+
+
+
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <script>
+        YUI().use('node', 'event', 'datatype', function (Y) {
+            const form = Y.one('#signup-form');
+            const usernameInput = Y.one('#uname');
+            const emailInput = Y.one('#email');
+            const passwordInput = Y.one('#password');
+
+            form.on('submit', function (e) {
+                e.preventDefault(); 
+
+                const username = usernameInput.get('value');
+                const email = emailInput.get('value');
+                const password = passwordInput.get('value');
+
+                if (!username || !email || !password) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                const formData = {
+                    username: username,
+                    email: email,
+                    password: password
+                };
+
+                let existingData = localStorage.getItem('formData');
+                if (existingData) {
+                    existingData = JSON.parse(existingData);
+                } else {
+                    existingData = [];
+                }
+
+                existingData.push(formData);
+
+                localStorage.setItem('formData', JSON.stringify(existingData));
+
+                window.location.href = "/login.html"; 
+            });
+        });
+    </script>
+
+</body>
+</html>

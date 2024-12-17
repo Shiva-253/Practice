@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUI Pie Chart Example</title>
+
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">  <!-- Apply YUI skin -->
+
+    <div class="img">
+
+    </div>
+
+    <div class="img-space">
+
+    </div>
+
+
+   <script>
+    YUI().use('node', 'event', function(Y) {
+        var parent = Y.one('.img');
+
+        var btn1 = '<button class="btn1"> Krishna </button>'
+        var btn2 = '<button class="btn2"> Shiva </button>'
+        var btn3 = '<button class="btn3"> Bhramha </button>'
+
+        parent.append(btn1);
+        parent.append(btn2);
+        parent.append(btn3);
+
+        var button1 = Y.one('.btn1');
+        var button2 = Y.one('.btn2');
+        var button3 = Y.one('.btn3');
+
+        var image = Y.one('.img-space');
+
+        var imgTag1 = '<img src="krishna.jpg" width="1000" height="800">';
+        var imgTag2 = '<img src="shiva.jpg" width="1000" height="800">';
+        var imgTag3 = '<img src="bhramha.jpg" width="1000" height="800">';
+
+        button1.setStyle('color', 'red');
+        button1.setStyle('padding', '10px');
+        button1.setStyle('border', '2px solid black');
+        button1.setStyle('margin', '20px 280px');
+
+        button2.setStyle('color', 'red');
+        button2.setStyle('padding', '10px');
+        button2.setStyle('border', '2px solid black');
+        button2.setStyle('margin', '20px 280px');
+
+        button3.setStyle('color', 'red');
+        button3.setStyle('padding', '10px');
+        button3.setStyle('border', '2px solid black');
+        button3.setStyle('margin', '20px 280px');
+
+        image.setStyle('display', 'flex');
+        image.setStyle('align-items', 'center');
+        image.setStyle('justify-content', 'center');
+
+        button1.on('mouseover', function() {
+            image.append(imgTag1);
+        });
+
+        button1.on('mouseout', function(){
+            image.empty();
+        });
+
+        button2.on('mouseover', function() {
+            image.append(imgTag2);
+        });
+
+        button2.on('mouseout', function(){
+            image.empty();
+        });
+
+        button3.on('mouseover', function() {
+            image.append(imgTag3);
+        });
+
+        button3.on('mouseout', function(){
+            image.empty();
+        });
+        
+    });
+   </script>
+
+</body>
+</html>
