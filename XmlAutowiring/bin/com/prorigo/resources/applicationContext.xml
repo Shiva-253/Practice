@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean class="com.prorigo.beans.Address" id="address">  <!-- This id should be same as private Address address; -->
+   		<property name="houseno" value="100" />
+   		<property name="city" value="Pune" />
+   		<property name="pincode" value="313133" />
+   </bean>
+   
+      <bean class="com.prorigo.beans.Student" id="stdId" autowire="byName" >
+   		<property name="name" value="Krishna" />
+   		<property name="rollno" value="101" />
+   	<!--  	<property name="address" ref="addrId" /> -->
+   </bean>
+
+</beans>
